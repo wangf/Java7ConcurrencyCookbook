@@ -43,7 +43,7 @@ public class Main {
 		
 		// Wait for the finalization of the threads. Meanwhile, 
 		// write the status of those threads in a file
-		try (FileWriter file = new FileWriter(".\\data\\log.txt");PrintWriter pw = new PrintWriter(file);){
+		try (FileWriter file = new FileWriter("data/log.txt");PrintWriter pw = new PrintWriter(file);){
 			
 			for (int i=0; i<10; i++){
 				pw.println("Main : Status of Thread "+i+" : "+threads[i].getState());
