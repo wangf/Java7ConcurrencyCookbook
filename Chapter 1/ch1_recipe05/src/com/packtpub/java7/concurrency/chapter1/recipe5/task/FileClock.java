@@ -21,6 +21,7 @@ public class FileClock implements Runnable {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {
 				System.out.printf("The FileClock has been interrupted");
+				break;
 			}
 		}
 	}

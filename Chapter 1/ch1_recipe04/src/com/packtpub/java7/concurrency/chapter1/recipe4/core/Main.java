@@ -19,7 +19,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// Creates the Runnable object and the Thread to run it
-		FileSearch searcher=new FileSearch("C:\\","autoexec.bat");
+		FileSearch searcher=new FileSearch("/","autoexec.bat");
 		Thread thread=new Thread(searcher);
 		
 		// Starts the Thread
@@ -27,7 +27,7 @@ public class Main {
 		
 		// Wait for ten seconds
 		try {
-			TimeUnit.SECONDS.sleep(10);
+			TimeUnit.SECONDS.sleep(5);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

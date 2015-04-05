@@ -36,7 +36,7 @@ public class PrimeGenerator extends Thread{
 		if (number <=2) {
 			return true;
 		}
-		for (long i=2; i<number; i++){
+		for (long i=2; i< number/2; i++){
 			if ((number % i)==0) {
 				return false;
 			}
