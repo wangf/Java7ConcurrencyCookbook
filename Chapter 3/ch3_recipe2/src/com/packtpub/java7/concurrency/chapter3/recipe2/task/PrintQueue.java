@@ -37,7 +37,7 @@ public class PrintQueue {
 	public PrintQueue(){
 		semaphore=new Semaphore(3);
 		freePrinters=new boolean[3];
-		for (int i=0; i<3; i++){
+		for (int i=0; i<freePrinters.length; i++){
 			freePrinters[i]=true;
 		}
 		lockPrinters=new ReentrantLock();

@@ -45,7 +45,8 @@ public class Main {
 		// Creates, initializes and starts 5 Searcher objects
 		Searcher searchers[]=new Searcher[PARTICIPANTS];
 		for (int i=0; i<PARTICIPANTS; i++){
-			searchers[i]=new Searcher(i*LINES_PARTICIPANT, (i*LINES_PARTICIPANT)+LINES_PARTICIPANT, mock, results, 5,barrier);
+			searchers[i]=new Searcher(i*LINES_PARTICIPANT, (i*LINES_PARTICIPANT)+LINES_PARTICIPANT, 
+				mock, results, 5,barrier);
 			Thread thread=new Thread(searchers[i]);
 			thread.start();
 		}

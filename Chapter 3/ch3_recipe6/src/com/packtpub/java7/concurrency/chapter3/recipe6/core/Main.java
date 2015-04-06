@@ -17,7 +17,7 @@ public class Main {
 		
 		// Creates the Phaser
 		MyPhaser phaser=new MyPhaser();
-		
+		phaser.register();
 		// Creates 5 students and register them in the phaser
 		Student students[]=new Student[5];
 		for (int i=0; i<students.length; i++){
@@ -33,14 +33,16 @@ public class Main {
 		}
 		
 		// Wait for the finalization of the threads
-		for (int i=0; i<threads.length; i++) {
-			try {
-				threads[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
+//		for (int i=0; i<threads.length; i++) {
+//			try {
+//				threads[i].join();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		while (!phaser.isTerminated()) {
+            phaser.arriveAndAwaitAdvance();
+        }
 		// Check that the Phaser is in the Terminated state
 		System.out.printf("Main: The phaser has finished: %s.\n",phaser.isTerminated());
 		

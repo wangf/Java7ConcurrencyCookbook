@@ -20,9 +20,9 @@ public class Main {
 		Phaser phaser=new Phaser(3);
 		
 		// Creates 3 FileSearch objects. Each of them search in different directory
-		FileSearch system=new FileSearch("C:\\Windows", "log", phaser);
-		FileSearch apps=new FileSearch("C:\\Program Files","log",phaser);
-		FileSearch documents=new FileSearch("C:\\Documents And Settings","log",phaser);
+		FileSearch system=new FileSearch(System.getProperty("user.home")+"/Downloads", "gz", phaser);
+		FileSearch apps=new FileSearch(System.getProperty("user.home")+"/Desktop","pdf",phaser);
+		FileSearch documents=new FileSearch(System.getProperty("user.home")+"/.config/","ini",phaser);
 		
 		// Creates a thread to run the system FileSearch and starts it
 		Thread systemThread=new Thread(system,"System");
