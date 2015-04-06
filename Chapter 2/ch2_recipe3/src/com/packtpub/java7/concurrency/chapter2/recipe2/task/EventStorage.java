@@ -35,13 +35,15 @@ public class EventStorage {
 	public synchronized void set(){
 			while (storage.size()==maxSize){
 				try {
+					System.out.printf("%s set into wait.\n",Thread.currentThread().getName());
 					wait();
+					System.out.printf("%s set wake up.\n",Thread.currentThread().getName());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 			storage.add(new Date());
-			System.out.printf("Set: %d",storage.size());
+			System.out.printf("Set: %d.\n",storage.size());
 			notify();
 	}
 	
@@ -51,12 +53,14 @@ public class EventStorage {
 	public synchronized void get(){
 			while (storage.size()==0){
 				try {
+					System.out.printf("%s get into wait.\n",Thread.currentThread().getName());
 					wait();
+					System.out.printf("%s get wake up.\n",Thread.currentThread().getName());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			System.out.printf("Get: %d: %s",storage.size(),((LinkedList<?>)storage).poll());
+			System.out.printf("Get: %d: %s.\n",storage.size(),((LinkedList<?>)storage).poll());
 			notify();
 	}
 	

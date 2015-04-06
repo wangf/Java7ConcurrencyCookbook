@@ -16,6 +16,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		long start= System.currentTimeMillis();
 		/**
 		 * Creates a simulated file with 100 lines
 		 */
@@ -30,8 +31,8 @@ public class Main {
 		 * Creates a producer and a thread to run it
 		 */
 		Producer producer=new Producer(mock, buffer);
-		Thread threadProducer=new Thread(producer,"Producer");
-		
+		Thread threadProducer=new Thread(producer,"Producer 1");
+		Thread threadProducer2=new Thread(new Producer(new FileMock(101, 10), buffer),"Producer2");
 		/**
 		 * Creates three consumers and threads to run them
 		 */
@@ -47,9 +48,21 @@ public class Main {
 		 * Strats the producer and the consumers
 		 */
 		threadProducer.start();
+		threadProducer2.start();
 		for (int i=0; i<3; i++){
 			threadConsumers[i].start();
 		}
+		try {
+			threadProducer.join();
+			threadProducer2.join();
+			for (int i=0; i<3; i++){
+				threadConsumers[i].join();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.printf("used %d ms\n", (System.currentTimeMillis() - start));
 	}
 
 }

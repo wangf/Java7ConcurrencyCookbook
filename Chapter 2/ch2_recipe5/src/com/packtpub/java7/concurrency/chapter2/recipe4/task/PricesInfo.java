@@ -35,22 +35,24 @@ public class PricesInfo {
 	 * Returns the first price
 	 * @return the first price
 	 */
-	public double getPrice1() {
+	public String getPrice1() {
 		lock.readLock().lock();
+		long start = System.currentTimeMillis();
 		double value=price1;
 		lock.readLock().unlock();
-		return value;
+		return value + "\t" + start;
 	}
 
 	/**
 	 * Returns the second price
 	 * @return the second price
 	 */
-	public double getPrice2() {
+	public String getPrice2() {
 		lock.readLock().lock();
+		long start = System.currentTimeMillis();
 		double value=price2;
 		lock.readLock().unlock();
-		return value;
+		return value + "\t" + start;
 	}
 
 	/**

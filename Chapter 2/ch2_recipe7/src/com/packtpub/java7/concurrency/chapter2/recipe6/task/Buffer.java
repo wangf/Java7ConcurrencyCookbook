@@ -64,6 +64,7 @@ public class Buffer {
 			while (buffer.size() == maxSize) {
 				space.await();
 			}
+			System.out.printf("%s: obtain  lock\n", Thread.currentThread().getName());
 			buffer.offer(line);
 			System.out.printf("%s: Inserted Line: %d\n", Thread.currentThread()
 					.getName(), buffer.size());
@@ -87,7 +88,7 @@ public class Buffer {
 			while ((buffer.size() == 0) &&(hasPendingLines())) {
 				lines.await();
 			}
-			
+			System.out.printf("%s: obtain  lock\n", Thread.currentThread().getName());
 			if (hasPendingLines()) {
 				line = buffer.poll();
 				System.out.printf("%s: Line Readed: %d\n",Thread.currentThread().getName(),buffer.size());
