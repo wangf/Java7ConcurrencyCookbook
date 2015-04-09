@@ -1,4 +1,4 @@
-package com.packtpub.java7.concurrency.chapter4.recipe1.task;
+package com.packtpub.java7.concurrency.chapter4.recipe2.task;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

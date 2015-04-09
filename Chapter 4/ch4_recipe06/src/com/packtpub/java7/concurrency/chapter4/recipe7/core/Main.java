@@ -39,11 +39,11 @@ public class Main {
 		executor.shutdown();
 		
 		// Waits for the finalization of the executor
-		try {
-			executor.awaitTermination(1, TimeUnit.DAYS);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			executor.awaitTermination(2, TimeUnit.SECONDS);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 
 		// Writes the finalization message
 		System.out.printf("Core: Ends at: %s\n",new Date());

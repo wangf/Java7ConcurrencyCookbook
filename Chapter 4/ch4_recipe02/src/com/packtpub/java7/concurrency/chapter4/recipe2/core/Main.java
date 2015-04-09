@@ -1,7 +1,7 @@
-package com.packtpub.java7.concurrency.chapter4.recipe1.core;
+package com.packtpub.java7.concurrency.chapter4.recipe2.core;
 
-import com.packtpub.java7.concurrency.chapter4.recipe1.task.Server;
-import com.packtpub.java7.concurrency.chapter4.recipe1.task.Task;
+import com.packtpub.java7.concurrency.chapter4.recipe2.task.Server;
+import com.packtpub.java7.concurrency.chapter4.recipe2.task.Task;
 
 /**
  * Main class of the example. Creates a server and 100 request of the Task class

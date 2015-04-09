@@ -40,6 +40,7 @@ public class UserValidator {
 			System.out.printf("Validator %s: Validating a user during %d seconds\n",this.name,duration);
 			TimeUnit.SECONDS.sleep(duration);
 		} catch (InterruptedException e) {
+			System.out.printf("%s validating stopped\n",this.name);
 			return false;
 		}
 		

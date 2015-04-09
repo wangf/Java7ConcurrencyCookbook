@@ -40,7 +40,7 @@ public class ReportProcessor implements Runnable {
 	public void run() {
 		while (!end){
 			try {
-				Future<String> result=service.poll(20, TimeUnit.SECONDS);
+				Future<String> result=service.poll(10, TimeUnit.SECONDS);
 				if (result!=null) {
 					String report=result.get();
 					System.out.printf("ReportReceiver: Report Recived: %s\n",report);
