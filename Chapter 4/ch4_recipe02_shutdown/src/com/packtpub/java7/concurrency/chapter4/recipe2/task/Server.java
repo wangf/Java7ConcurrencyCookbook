@@ -1,7 +1,8 @@
-package com.packtpub.java7.concurrency.chapter4.recipe1.task;
+package com.packtpub.java7.concurrency.chapter4.recipe2.task;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class simulates a server, for example, a web server, that receives
@@ -9,7 +10,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  *
  */
 public class Server {
-	
+
 	/**
 	 * ThreadPoolExecutors to manage the execution of the request
 	 */
@@ -19,7 +20,7 @@ public class Server {
 	 * Constructor of the class. Creates the executor object
 	 */
 	public Server(){
-		executor=(ThreadPoolExecutor)Executors.newCachedThreadPool();
+		executor=(ThreadPoolExecutor)Executors.newFixedThreadPool(5);
 	}
 	
 	/**
@@ -41,6 +42,14 @@ public class Server {
 	 */
 	public void endServer() {
 		executor.shutdown();
+		try {
+			executor.awaitTermination(10, TimeUnit.SECONDS);
+			System.out.printf("=====10 seconds ===== %s\n", executor.isTerminated());
+			if(!executor.isTerminated())executor.shutdownNow();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

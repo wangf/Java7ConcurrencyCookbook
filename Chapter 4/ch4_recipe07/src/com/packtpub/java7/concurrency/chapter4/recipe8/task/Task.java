@@ -16,7 +16,7 @@ public class Task implements Runnable {
 	 * Name of the task
 	 */
 	private String name;
-	
+	private int  count=0;
 	/**
 	 * Constructor of the class
 	 * @param name the name of the class
@@ -31,7 +31,8 @@ public class Task implements Runnable {
 	 */
 	@Override
 	public void run() {
-		System.out.printf("%s: Executed at: %s\n",name,new Date());
+		System.out.printf("%s: Executed %d times at: %s\n",name,++count,new Date());
+		throw new RuntimeException("I am intended");
 	}
 
 }

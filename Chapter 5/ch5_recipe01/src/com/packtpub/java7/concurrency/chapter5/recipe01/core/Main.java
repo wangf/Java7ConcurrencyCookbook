@@ -1,6 +1,7 @@
 package com.packtpub.java7.concurrency.chapter5.recipe01.core;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
@@ -35,20 +36,32 @@ public class Main {
 		pool.execute(task);
 
 		// Write information about the pool
-		do {
-			System.out.printf("Main: Thread Count: %d\n",pool.getActiveThreadCount());
-			System.out.printf("Main: Thread Steal: %d\n",pool.getStealCount());
-			System.out.printf("Main: Paralelism: %d\n",pool.getParallelism());
-			try {
-				TimeUnit.MILLISECONDS.sleep(5);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		} while (!task.isDone());
-	
+//		do {
+//			System.out.printf("[Main]: Thread Count: %d\n",pool.getActiveThreadCount());
+//			System.out.printf("[Main]: Thread Steal: %d\n",pool.getStealCount());
+//			System.out.printf("[Main]: Paralelism: %d\n",pool.getParallelism());
+//			try {
+//				TimeUnit.MILLISECONDS.sleep(5);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		} while (!task.isDone());
+//		try {
+//			task.get();
+////			System.out.printf("[Main]: Thread Count: %d\n",pool.getActiveThreadCount());
+////			System.out.printf("[Main]: Thread Steal: %d\n",pool.getStealCount());
+////			System.out.printf("[Main]: Paralelism: %d\n",pool.getParallelism());
+//		} catch (InterruptedException | ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
 		// Shutdown the pool
 		pool.shutdown();
-		
+//		try {
+//			pool.awaitTermination(1, TimeUnit.DAYS);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		// Check if the task has completed normally
 		if (task.isCompletedNormally()){
 			System.out.printf("Main: The process has completed normally.\n");
@@ -58,7 +71,7 @@ public class Main {
 		for (int i=0; i<products.size(); i++){
 			Product product=products.get(i);
 			if (product.getPrice()!=12) {
-				System.out.printf("Product %s: %f\n",product.getName(),product.getPrice());
+				System.out.printf("[main] Product %s: %f\n",product.getName(),product.getPrice());
 			}
 		}
 		

@@ -28,8 +28,9 @@ public class Main {
 		// Create a ForkJoinPool with the default constructor
 		ForkJoinPool pool=new ForkJoinPool();
 		
+		int number=5;
 		// Create a Task to process the array
-		SearchNumberTask task=new SearchNumberTask(array,0,1000,5,manager);
+		SearchNumberTask task=new SearchNumberTask(array,0,1000,number,manager);
 		
 		// Execute the task
 		pool.execute(task);
@@ -47,6 +48,7 @@ public class Main {
 		
 		// Write a message to indicate the end of the program
 		System.out.printf("Main: The program has finished\n");
+//		System.out.printf("Task: Number %d found in position %d\n",number,task.join());
 	}
 
 }

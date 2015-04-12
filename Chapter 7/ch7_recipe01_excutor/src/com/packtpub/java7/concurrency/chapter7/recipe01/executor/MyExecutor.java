@@ -2,12 +2,17 @@ package com.packtpub.java7.concurrency.chapter7.recipe01.executor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.packtpub.java7.concurrency.chapter7.recipe01.task.RunnableHolder;
+import com.packtpub.java7.concurrency.chapter7.recipe01.task.SleepTwoSecondsTask;
 
 /**
  * This class extends the ThreadPoolExecutor class to implement a customized executor.
@@ -23,7 +28,8 @@ public class MyExecutor extends ThreadPoolExecutor {
 	 * to show the duration of the task
 	 */
 	private ConcurrentHashMap<String, Date> startTimes;
-	
+	private AtomicInteger failed = new AtomicInteger();
+	Random random = new Random();
 	/**
 	 * Constructor of the executor. Call the parent constructor and initializes the HashMap
 	 * @param corePoolSize Number of threads to keep in the pool
@@ -48,6 +54,7 @@ public class MyExecutor extends ThreadPoolExecutor {
 		System.out.printf("MyExecutor[shutdown]: Executed tasks: %d\n",getCompletedTaskCount());
 		System.out.printf("MyExecutor[shutdown]: Running tasks: %d\n",getActiveCount());
 		System.out.printf("MyExecutor[shutdown]: Pending tasks: %d\n",getQueue().size());
+		System.out.printf("MyExecutor[shutdown]: failed tasks: %d\n",failed.get());
 		super.shutdown();
 	}
 
@@ -70,7 +77,14 @@ public class MyExecutor extends ThreadPoolExecutor {
 	@Override
 	protected void beforeExecute(Thread t, Runnable r) {
 		System.out.printf("MyExecutor[=====]: A task is beginning: %s\n",t.getName());
-		startTimes.put(String.valueOf(r.hashCode()), new Date());
+		System.out.printf("MyExecutor[before]: Pending tasks: %d\n",getQueue().size());
+		if(random.nextBoolean()){
+			RunnableHolder.setTorun(true);
+			startTimes.put(String.valueOf(r.hashCode()), new Date());
+		} else {
+				RunnableHolder.setTorun(false);
+				failed.incrementAndGet();
+		}
 	}
 
 	/**
@@ -79,6 +93,18 @@ public class MyExecutor extends ThreadPoolExecutor {
 	@Override
 	protected void afterExecute(Runnable r, Throwable t) {
 		Future<?> result=(Future<?>)r;
+		try {
+			if(result.get() == null) {
+				submit(r);				
+				return;
+			}
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ExecutionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			System.out.printf("MyExecutor[*****]: task finished %s\n", result.get());
 			System.out.printf("MyExecutor[*****]: Duration: %d\n", (System.currentTimeMillis() - startTimes.remove(String.valueOf(r.hashCode())).getTime()));

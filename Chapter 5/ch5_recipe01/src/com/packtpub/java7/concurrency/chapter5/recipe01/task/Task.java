@@ -2,6 +2,7 @@ package com.packtpub.java7.concurrency.chapter5.recipe01.task;
 
 import java.util.List;
 import java.util.concurrent.RecursiveAction;
+import java.util.concurrent.TimeUnit;
 
 import com.packtpub.java7.concurrency.chapter5.recipe01.util.Product;
 
@@ -54,6 +55,12 @@ public class Task extends RecursiveAction {
 	 */
 	@Override
 	protected void compute() {
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (last-first<10) {
 			updatePrices();
 		} else {

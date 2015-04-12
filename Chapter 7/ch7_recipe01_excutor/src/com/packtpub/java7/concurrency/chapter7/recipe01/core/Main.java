@@ -55,29 +55,29 @@ public class Main {
 		/*
 		 * Call the shutdown method 
 		 */
-		myExecutor.shutdown();
+//		myExecutor.shutdown();
 		
 		/*
 		 * Get the results of the execution of the last five tasks
 		 */
-		for (int i=4; i<10; i++){
-			try {
-				String result=results.get(i).get();
-				System.out.printf("Main[Result]: for Task [%d] : %s\n",i,result);
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
-		}
-		
+//		for (int i=4; i<10; i++){
+//			try {
+//				String result=results.get(i).get();
+//				System.out.printf("Main[Result]: for Task [%d] : %s\n",i,result);
+//			} catch (InterruptedException | ExecutionException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
 		/*
 		 * Wait for the finalization of the Executor
 		 */
 		try {
-			myExecutor.awaitTermination(1, TimeUnit.DAYS);
+			myExecutor.awaitTermination(20, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+		myExecutor.shutdown();
 		/*
 		 * Write a message indicating the end of the program
 		 */

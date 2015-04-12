@@ -19,9 +19,9 @@ public class Main {
 		ForkJoinPool pool=new ForkJoinPool();
 		
 		// Create three FolderProcessor tasks for three diferent folders
-		FolderProcessor system=new FolderProcessor("C:\\Windows", "log");
-		FolderProcessor apps=new FolderProcessor("C:\\Program Files","log");
-		FolderProcessor documents=new FolderProcessor("C:\\Documents And Settings","log");
+		FolderProcessor system=new FolderProcessor(System.getProperty("user.home")+"/Downloads", "gz");
+		FolderProcessor apps=new FolderProcessor(System.getProperty("user.home")+"/Desktop","pdf");
+		FolderProcessor documents=new FolderProcessor(System.getProperty("user.home")+"/.config/","ini");
 		
 		// Execute the three tasks in the pool
 		pool.execute(system);
