@@ -36,7 +36,7 @@ public class Main {
 		boolean value;
 		do {
 			try {
-				value=lock.tryLock(1,TimeUnit.SECONDS);
+				value=lock.tryLock(20,TimeUnit.SECONDS);
 				if (!value) {
 					System.out.printf("Main: Trying to get the Lock\n");
 				}

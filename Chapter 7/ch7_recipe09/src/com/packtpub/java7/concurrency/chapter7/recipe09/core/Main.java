@@ -82,7 +82,7 @@ public class Main {
 		/*
 		 * Wait for the finalization of the consumer
 		 */
-		consumerThread.join();
+//		consumerThread.join();
 		
 		/*
 		 * Write a message indicating the end of the program
