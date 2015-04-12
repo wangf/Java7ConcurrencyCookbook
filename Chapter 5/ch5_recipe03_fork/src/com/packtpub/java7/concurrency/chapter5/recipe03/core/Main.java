@@ -15,6 +15,7 @@ public class Main {
 	 * Main method of the example
 	*/
 	public static void main(String[] args) {
+		long start=System.currentTimeMillis();
 		// Create the pool
 		ForkJoinPool pool=new ForkJoinPool();
 		
@@ -58,7 +59,7 @@ public class Main {
 		results=documents.join();
 		System.out.printf("Documents: %d files found.\n",results.size());
 		
-
+		System.out.printf("Used: %d found.\n",(System.currentTimeMillis() - start));
 	}
 
 }
