@@ -14,24 +14,28 @@ public class Main {
 	 * @param args
 	 */
 	public static void main (String args[]){
+		long start=System.currentTimeMillis();
 		// Creates the print queue
 		PrintQueue printQueue=new PrintQueue();
 		
 		// Cretes ten jobs and the Threads to run them
-		Thread thread[]=new Thread[10];
-		for (int i=0; i<10; i++){
+		Thread thread[]=new Thread[1000];
+		for (int i=0; i<thread.length; i++){
 			thread[i]=new Thread(new Job(printQueue),"Thread "+i);
 		}
 		
 		// Launch a thread ever 0.1 seconds
-		for (int i=0; i<10; i++){
+		for (int i=0; i<thread.length; i++){
 			thread[i].start();
+		}
+		for (int i=0; i<thread.length; i++){
 			try {
-				Thread.sleep(100);
+				thread[i].join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		System.out.printf("used %d ms\n",(System.currentTimeMillis() - start));
 	}
 
 }
